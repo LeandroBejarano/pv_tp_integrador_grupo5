@@ -38,17 +38,24 @@ const productsSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(fetchProducts .pending, state => {
+            .addCase(fetchProducts.pending, state => {
                 state.status = "loading";
             })
-            .addCase(fetchProducts .fulfilled, (state, action) => {
+            .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.lista = action.payload;
                 state.status = "succeeded";
             })
-            .addCase(fetchProducts .rejected, state => {
+            .addCase(fetchProducts.rejected, state => {
                 state.status = "failed";
             });
     },
-})
+});
 
-export default productsSlice.reducer
+export const {
+    toggleFavorito,
+    eliminarProducto,
+    editarProducto,
+    agregarProducto,
+} = productsSlice.actions;
+
+export default productsSlice.reducer;
