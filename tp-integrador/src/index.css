@@ -1,68 +1,32 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/*
+  Los estilos generales  de tipografía, botones, formularios, tarjetas y tablas  se manejan
+  directamente con las clases de Bootstrap.
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+  */
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; /* Mantiene tu fuente */
+    line-height: 1.5;
+    background-color: #f8f9fa; /* Color de fondo claro de Bootstrap */
+    color: #212529; /* Color de texto oscuro de Bootstrap */
+    margin: 0; /* Elimina márgenes por defecto del body */
+    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la vista */
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para un layout flexible */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* El #root  estará centrado por el 'container' de Bootstrap en App.jsx */
+#root {
+    flex-grow: 1; /* Permite que el contenido #root crezca y ocupe el espacio disponible */
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* Puedes mantener estas reglas si quieres personalizar los enlaces */
+a {
+    font-weight: 500;
+    color: #007bff; /* Un azul estándar de Bootstrap para enlaces */
+    text-decoration: none; /* Elimina subrayado por defecto */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+a:hover {
+    color: #0056b3; /* Azul más oscuro al pasar el ratón */
+    text-decoration: underline; /* Subrayado al pasar el ratón */
 }
