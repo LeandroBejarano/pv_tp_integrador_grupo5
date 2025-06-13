@@ -6,6 +6,8 @@ Bejarano, Leandro Ruben - LeandroBejarano
 
 Rearte, Aldo Daniel - satan0600
 
+--------------------------------------------
+
 ¿Cómo iniciar nuestro proyecto?
 
 Una vez instalado el repositorio y estando en VisualStudioCode, dirigete a la terminal y ejecuta los siguientes comandos:
@@ -16,6 +18,7 @@ npm install
 
 npm run dev
 
+--------------------------------------------
 
 ¿De qué trata el proyecto?
 
