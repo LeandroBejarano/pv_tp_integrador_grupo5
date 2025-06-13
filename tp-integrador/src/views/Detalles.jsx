@@ -35,7 +35,6 @@ function Detalles() {
                     <p className="card-text"><strong>Precio:</strong> ${producto.price.toFixed(2)}</p>
                     <p className="card-text"><strong>Categoría:</strong> {producto.category}</p>
                     <p className="card-text"><strong>Descripción:</strong> {producto.description}</p>
-                    <p className="card-text"><strong>Stock:</strong> {producto.stock}</p>
                     {/* form-check form-switch: Estilo de interruptor para el checkbox. */}
                     <div className="form-check form-switch mb-3">
                         <input
