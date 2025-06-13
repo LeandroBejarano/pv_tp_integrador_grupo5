@@ -3,6 +3,7 @@
 Integrantes - Usuario de GitHub
 
 Bejarano, Leandro Ruben - LeandroBejarano
+
 Rearte, Aldo Daniel - satan0600
 
 ¿Cómo iniciar nuestro proyecto?
