@@ -1,0 +1,32 @@
+/*
+  Los estilos generales  de tipografía, botones, formularios, tarjetas y tablas  se manejan
+  directamente con las clases de Bootstrap.
+
+  */
+body {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; /* Mantiene tu fuente */
+    line-height: 1.5;
+    background-color: #f8f9fa; /* Color de fondo claro de Bootstrap */
+    color: #212529; /* Color de texto oscuro de Bootstrap */
+    margin: 0; /* Elimina márgenes por defecto del body */
+    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la vista */
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para un layout flexible */
+}
+
+/* El #root  estará centrado por el 'container' de Bootstrap en App.jsx */
+#root {
+    flex-grow: 1; /* Permite que el contenido #root crezca y ocupe el espacio disponible */
+}
+
+/* Puedes mantener estas reglas si quieres personalizar los enlaces */
+a {
+    font-weight: 500;
+    color: #007bff; /* Un azul estándar de Bootstrap para enlaces */
+    text-decoration: none; /* Elimina subrayado por defecto */
+}
+
+a:hover {
+    color: #0056b3; /* Azul más oscuro al pasar el ratón */
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+}
