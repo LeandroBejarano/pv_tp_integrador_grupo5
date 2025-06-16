@@ -3,27 +3,27 @@ import { useDispatch, useSelector } from "react-redux"; //
 import { fetchProducts, toggleFavorito } from "../services/ProductsSlice"; //
 import { Link } from "react-router-dom"; //
 
-function ListaProductos () {
+function ListaProductos() {
     const dispatch = useDispatch(); //
     const productos = useSelector(state => state.products.lista); //
     const favoritos = useSelector(state => state.products.favoritos); //
     const status = useSelector(state => state.products.status); //
 
-    useEffect(()=>{ //
-        if (status==='idle'){
+    useEffect(() => { //
+        if (status === 'idle') {
             dispatch(fetchProducts());
         }
     }, [status, dispatch])
 
     if (status === 'loading') return <p className="text-center my-5">Cargando lista...</p>; //
 
-    return(
+    return (
         <div>
             <h2 className="mb-4 text-center">Lista de Productos</h2>
             {/* row: Contenedor para columnas en el sistema de grid de Bootstrap. */}
             {/* g-4: Espacio (gutter) de 4 unidades entre columnas. */}
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"> {/* row-cols-X para responsive grid */}
-                {productos.map(producto =>(
+                {productos.map(producto => (
                     // col: Columna en el sistema de grid.
                     // mb-4: Margen inferior para cada tarjeta.
                     <div key={producto.id} className="col mb-4">
@@ -51,17 +51,16 @@ function ListaProductos () {
                                     <Link to={`/lista/${producto.id}`} className="btn btn-primary">Ver Detalles</Link> {/* */}
                                     {/* form-check form-switch: Estilo de interruptor para el checkbox. */}
                                     {/* mt-2: Margen superior. */}
-                                    <div className="form-check form-switch mt-2">
-                                        <input
-                                            className="form-check-input"
-                                            type="checkbox"
-                                            id={`fav-${producto.id}`}
-                                            checked={favoritos.includes(producto.id)}
-                                            onChange={() => dispatch(toggleFavorito(producto.id))}
-                                        />
-                                        <label className="form-check-label" htmlFor={`fav-${producto.id}`}>
-                                            Favorito
-                                        </label>
+                                    <div
+                                        className={`position-absolute top-0 end-0 m-2`}
+                                        style={{ zIndex: 1 }}
+                                    >
+                                        <i
+                                            className={`bi ${favoritos.includes(producto.id) ? 'bi-star-fill text-warning' : 'bi-star'} fs-4`}
+                                            style={{ cursor: 'pointer' }}
+                                            title={favoritos.includes(producto.id) ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+                                            onClick={() => dispatch(toggleFavorito(producto.id))}
+                                        ></i>
                                     </div>
                                 </div>
                             </div>

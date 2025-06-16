@@ -36,17 +36,16 @@ function Detalles() {
                     <p className="card-text"><strong>Categoría:</strong> {producto.category}</p>
                     <p className="card-text"><strong>Descripción:</strong> {producto.description}</p>
                     {/* form-check form-switch: Estilo de interruptor para el checkbox. */}
-                    <div className="form-check form-switch mb-3">
-                        <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="favoritoSwitch"
-                            checked={esFavorito}
-                            onChange={() => dispatch(toggleFavorito(producto.id))}
-                        />
-                        <label className="form-check-label" htmlFor="favoritoSwitch">
-                            Favorito
-                        </label>
+                    <div
+                        className={`position-absolute top-0 end-0 m-2`}
+                        style={{ zIndex: 1 }}
+                    >
+                        <i
+                            className={`bi ${favoritos.includes(producto.id) ? 'bi-star-fill text-warning' : 'bi-star'} fs-4`}
+                            style={{ cursor: 'pointer' }}
+                            title={favoritos.includes(producto.id) ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+                            onClick={() => dispatch(toggleFavorito(producto.id))}
+                        ></i>
                     </div>
                     {/* d-flex gap-2: Utilidad de Bootstrap para flexbox con espacio entre elementos. */}
                     <div className="d-flex gap-2">

@@ -33,18 +33,17 @@ function Favoritos() {
                                     <div className="mt-auto d-grid gap-2">
                                         <Link to={`/lista/${producto.id}`} className="btn btn-info btn-sm">Ver
                                             Detalles</Link> {/* */}
-                                        <div className="form-check form-switch mt-2">
-                                            <input
-                                                className="form-check-input"
-                                                type="checkbox"
-                                                id={`fav-${producto.id}`}
-                                                checked={true} // Siempre será true aquí
-                                                onChange={() => dispatch(toggleFavorito(producto.id))}
-                                            />
-                                            <label className="form-check-label" htmlFor={`fav-${producto.id}`}>
-                                                Quitar de favoritos
-                                            </label>
-                                        </div>
+                                        <div
+                                        className={`position-absolute top-0 end-0 m-2`}
+                                        style={{ zIndex: 1 }}
+                                    >
+                                        <i
+                                            className={`bi ${favoritos.includes(producto.id) ? 'bi-star-fill text-warning' : 'bi-star'} fs-4`}
+                                            style={{ cursor: 'pointer' }}
+                                            title={favoritos.includes(producto.id) ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+                                            onClick={() => dispatch(toggleFavorito(producto.id))}
+                                        ></i>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
