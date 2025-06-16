@@ -18,6 +18,11 @@ npm install
 
 npm run dev
 
+npm install react-router-dom
+
+npm install bootstrap-icons  // Para instalar la librería bootstrap-icons/font/bootstrap-icons.css
+
+
 --------------------------------------------
 
 ¿De qué trata el proyecto?
