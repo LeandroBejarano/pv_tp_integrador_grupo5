@@ -11,15 +11,17 @@ body {
     margin: 0; /* Elimina márgenes por defecto del body */
     min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la vista */
     display: flex;
-    flex-direction: column; /* Cambiado a columna para un layout flexible */
+    flex-direction: column; /* Esencial para el sticky footer (flex-grow-1 en #root) */
+    /* adding-top para compensar el navbar fijo */
+    padding-top: 60px; /* Ajusta  la altura de navbar */
 }
 
-/* El #root  estará centrado por el 'container' de Bootstrap en App.jsx */
+/* El #root crecerá para empujar el footer hacia abajo */
 #root {
     flex-grow: 1; /* Permite que el contenido #root crezca y ocupe el espacio disponible */
 }
 
-/* Puedes mantener estas reglas si quieres personalizar los enlaces */
+/* Se puede mantener estas reglas para personalizar los enlaces */
 a {
     font-weight: 500;
     color: #007bff; /* Un azul estándar de Bootstrap para enlaces */
