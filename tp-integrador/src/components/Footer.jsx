@@ -1,5 +1,4 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import { BrowserRouter, Link } from 'react-router-dom';
 
 function Footer() {
     const currentYear = new Date().getFullYear(); // Obtiene el año actual dinámicamente
@@ -21,25 +20,27 @@ function Footer() {
                     {/* text-white: Para que los enlaces sean blancos */}
                     {/* mx-2: Margen horizontal de 2 unidades */}
                     {/* text-decoration-none: Elimina el subrayado por defecto de los enlaces */}
-                    <Link to="/privacidad" className="text-white mx-2 text-decoration-none">Política de
-                        Privacidad</Link>
-                    |
-                    <Link to="/terminos" className="text-white mx-2 text-decoration-none">Términos de Servicio</Link>
-                    |
-                    <Link to="/contacto" className="text-white mx-2 text-decoration-none">Contacto</Link>
+                    <BrowserRouter>
+                        <Link to="/privacidad" className="text-white mx-2 text-decoration-none">Política de
+                            Privacidad</Link>
+                        |
+                        <Link to="/terminos" className="text-white mx-2 text-decoration-none">Términos de Servicio</Link>
+                        |
+                        <Link to="/contacto" className="text-white mx-2 text-decoration-none">Contacto</Link>
+                    </BrowserRouter>
                 </p>
                 <div className="mt-2"> {/* mt-2: Margen superior para los iconos de redes sociales */}
                     {/* Iconos de redes sociales (puedes añadir SVG o FontAwesome/Bootstrap Icons aquí) */}
                     {/* Asumiendo que has importado 'bootstrap-icons/font/bootstrap-icons.css' en main.jsx si los usas. */}
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                       className="text-white mx-2">
+                        className="text-white mx-2">
                         <i className="bi bi-facebook"></i>
                     </a>
                     <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
                         <i className="bi bi-twitter"></i>
                     </a>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                       className="text-white mx-2">
+                        className="text-white mx-2">
                         <i className="bi bi-instagram"></i>
                     </a>
                 </div>
