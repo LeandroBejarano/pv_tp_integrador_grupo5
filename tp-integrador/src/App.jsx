@@ -4,6 +4,7 @@ import Inicio from './views/Inicio'; //
 import ListaProductos from './views/ListaProductos'; //
 import Favoritos from './views/Favoritos'; //
 import Detalles from './views/Detalles'; //
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             </Routes>
           </div>
         </BrowserRouter>
+        <Footer/>
       </div>
   )
 }
