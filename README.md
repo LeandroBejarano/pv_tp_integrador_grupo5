@@ -16,6 +16,8 @@ cd tp-integrador
 
 npm install
 
+npm install bootstrap-icons
+
 npm run dev
 
 --------------------------------------------
