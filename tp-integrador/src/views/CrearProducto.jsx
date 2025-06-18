@@ -1,8 +1,9 @@
 import ImagesDefault from '../services/ImagesDefault';
 import { useDispatch, useSelector } from 'react-redux';
 import { agregarProducto } from "../services/ProductsSlice"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import highestId from '../components/highestId';
+import { fetchProducts } from '../services/ProductsSlice';
 
 function CrearProducto() {
     const dispatch = useDispatch();
@@ -18,6 +19,12 @@ function CrearProducto() {
         image: '',
     });
 
+    useEffect(() => { // Para cargar previamente los productos, en caso de que primero se acceda a Crear Producto antes que a Lista de Productos
+        if (productos.length === 0) {
+            dispatch(fetchProducts());
+        }
+    }, [productos, dispatch]);
+
     const images = ImagesDefault();
 
     const handleChange = (e) => {
@@ -28,7 +35,7 @@ function CrearProducto() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const id = highestId(productos);
-        const productoFinal = {...nuevoProducto, id}; // Creo un nuevo producto que contiene el id
+        const productoFinal = { ...nuevoProducto, id }; // Creo un nuevo producto que contiene el id
         dispatch(agregarProducto(productoFinal));
         setNuevoProducto({
             title: '',
