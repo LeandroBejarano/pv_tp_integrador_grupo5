@@ -1,13 +1,14 @@
 import ImagesDefault from '../services/ImagesDefault';
 import { useDispatch, useSelector } from 'react-redux';
-import { agregarProducto } from "../services/ProductsSlice"
+import { agregarProducto, fetchProducts } from '../services/ProductsSlice';
 import { useState, useEffect } from 'react';
 import highestId from '../components/highestId';
-import { fetchProducts } from '../services/ProductsSlice';
+import { useNavigate } from 'react-router-dom';
 
 function CrearProducto() {
     const dispatch = useDispatch();
     const productos = useSelector(state => state.products.lista);
+    const navigate = useNavigate();
 
     const [nuevoProducto, setNuevoProducto] = useState({
         id: '',
@@ -15,11 +16,11 @@ function CrearProducto() {
         description: '',
         price: '',
         category: '',
-        rating: '',
+        rating: 0,
         image: '',
     });
 
-    useEffect(() => { // Para cargar previamente los productos, en caso de que primero se acceda a Crear Producto antes que a Lista de Productos
+    useEffect(() => {
         if (productos.length === 0) {
             dispatch(fetchProducts());
         }
@@ -35,71 +36,157 @@ function CrearProducto() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const id = highestId(productos);
-        const productoFinal = { ...nuevoProducto, id }; // Creo un nuevo producto que contiene el id
+        const productoFinal = {
+            ...nuevoProducto,
+            id: id,
+            price: parseFloat(nuevoProducto.price),
+            rating: { rate: parseFloat(nuevoProducto.rating), count: 100 }
+        };
+
         dispatch(agregarProducto(productoFinal));
+
         setNuevoProducto({
+            id: '',
             title: '',
             description: '',
             price: '',
             category: '',
-            rating: '',
+            rating: 0,
             image: '',
         });
-        alert(`Producto agregado, id: ${id}`);
+
+        navigate('/lista');
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <h1>Agregar nuevo producto</h1>
-                <label>Título:</label>
-                <input type="text" name="title" value={nuevoProducto.title} onChange={handleChange} />
+        // Card de Bootstrap con padding y sombra para destacar el formulario, centrado y con ancho máximo limitado
+        <div className="card p-4 shadow-sm mx-auto my-4" style={{ maxWidth: '600px' }}>
+            {/* Título centrado con margen inferior */}
+            <h2 className="mb-4 text-center">Crear Nuevo Producto</h2>
 
-                <label>Descripción:</label>
-                <textarea name="description" value={nuevoProducto.description} onChange={handleChange} />
-
-                <label>Precio:</label>
-                <input type="number" name="price" value={nuevoProducto.price} onChange={handleChange} />
-
-                <label>Categoría:</label>
-                <select name="category" value={nuevoProducto.category} onChange={handleChange}>
-                    <option value="">Seleccionar</option>
-                    <option value="men's clothing">Men's clothing</option>
-                    <option value="women's clothing">Women's clothing</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="jewelry">Jewelry</option>
-                </select>
-
-                <label>Rating:</label>
-                <input
-                    type="number"
-                    name="rating"
-                    value={nuevoProducto.rating}
-                    onChange={handleChange}
-                    min="0"
-                    max="5"
-                    step="0.1"
-                />
-                <label>Seleccionar imagen:</label>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "10px" }}>
-                    {images.map((img, index) => (
-                        <img key={index} src={img}
-                            alt={`img_${index}`}
-                            width="70"
-                            onClick={() => setNuevoProducto(prev => ({ ...prev, image: img }))}
-                        />
-                    ))}
+            {/* Formulario estilizado con Bootstrap */}
+            <form onSubmit={handleSubmit}>
+                {/* Grupo de formulario con margen inferior */}
+                <div className="mb-3">
+                    <label htmlFor="title" className="form-label">Título:</label>
+                    {/* Campo de texto con clase form-control para estilo Bootstrap */}
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="title"
+                        name="title"
+                        value={nuevoProducto.title}
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
-                {nuevoProducto.image && (
-                    <div>
-                        <img src={nuevoProducto.image} alt="Previsualización" width="60" />
+
+                <div className="mb-3">
+                    <label htmlFor="description" className="form-label">Descripción:</label>
+                    {/* Textarea con clase form-control para formato uniforme */}
+                    <textarea
+                        className="form-control"
+                        id="description"
+                        name="description"
+                        value={nuevoProducto.description}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="price" className="form-label">Precio:</label>
+                    {/* Input numérico con form-control y validación de mínimo y paso decimal */}
+                    <input
+                        type="number"
+                        className="form-control"
+                        id="price"
+                        name="price"
+                        value={nuevoProducto.price}
+                        onChange={handleChange}
+                        min="0"
+                        step="0.01"
+                        required
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="category" className="form-label">Categoría:</label>
+                    {/* Select estilizado con form-select de Bootstrap */}
+                    <select
+                        className="form-select"
+                        id="category"
+                        name="category"
+                        value={nuevoProducto.category}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Selecciona una categoría</option>
+                        <option value="men's clothing">Men's clothing</option>
+                        <option value="women's clothing">Women's clothing</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="jewelry">Jewelry</option>
+                    </select>
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="rating" className="form-label">Rating (0-5):</label>
+                    {/* Input numérico con controles para establecer valores decimales entre 0 y 5 */}
+                    <input
+                        type="number"
+                        className="form-control"
+                        id="rating"
+                        name="rating"
+                        value={nuevoProducto.rating}
+                        onChange={handleChange}
+                        min="0"
+                        max="5"
+                        step="0.1"
+                        required
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Seleccionar imagen:</label>
+                    {/* Flexbox para mostrar miniaturas en fila con separación (Bootstrap: d-flex, flex-wrap, gap-2) */}
+                    <div className="d-flex flex-wrap gap-2 mb-3">
+                        {images.map((img, index) => (
+                            <img
+                                key={index}
+                                src={img}
+                                alt={`img_${index}`}
+                                // img-thumbnail: bordes redondeados y padding, border-primary y border-3 si está seleccionada
+                                className={`img-thumbnail ${nuevoProducto.image === img ? 'border border-primary border-3' : ''}`}
+                                style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    objectFit: 'cover',
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => setNuevoProducto(prev => ({ ...prev, image: img }))}
+                            />
+                        ))}
                     </div>
-                )}
-            </div>
 
-            <button type="submit">Agregar Producto</button>
-        </form>
+                    {/* Imagen seleccionada con previsualización centrada y estilo responsive */}
+                    {nuevoProducto.image && (
+                        <div className="text-center">
+                            <p className="mb-2">Previsualización de la imagen:</p>
+                            <img
+                                src={nuevoProducto.image}
+                                alt="Previsualización"
+                                className="img-fluid rounded shadow-sm"
+                                style={{ maxWidth: '150px' }}
+                            />
+                        </div>
+                    )}
+                </div>
+
+                {/* Botón de envío con estilo de éxito y ancho completo */}
+                <button type="submit" className="btn btn-success w-100">Agregar Producto</button>
+            </form>
+        </div>
     );
-};
+}
 
-export default CrearProducto
+export default CrearProducto;
