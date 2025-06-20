@@ -32,7 +32,7 @@ function Detalles() {
                 {/* col-md-8: Columna que ocupa 8 de 12 en pantallas medianas. */}
                 <div className="col-md-8">
                     {/* card-text: Para el texto dentro de la tarjeta. */}
-                    <p className="card-text"><strong>Precio:</strong> ${producto.price.toFixed(2)}</p>
+                    <p className="card-text"><strong>Precio:</strong> ${producto.price}</p>
                     <p className="card-text"><strong>Categoría:</strong> {producto.category}</p>
                     <p className="card-text"><strong>Descripción:</strong> {producto.description}</p>
                     {/* form-check form-switch: Estilo de interruptor para el checkbox. */}

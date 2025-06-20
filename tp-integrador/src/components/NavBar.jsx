@@ -34,13 +34,13 @@ function NavBar() {
                         {/* nav-item: Para cada elemento de la lista de navegación. */}
                         <li className="nav-item">
                             {/* nav-link: Para cada enlace de navegación. */}
-                            <Link to='/inicio' className="nav-link">Página Principal</Link> {/* */}
-                        </li>
-                        <li className="nav-item">
                             <Link to='/lista' className="nav-link">Lista de Productos</Link> {/* */}
                         </li>
                         <li className="nav-item">
                             <Link to='/favoritos' className="nav-link">Productos Favoritos</Link> {/* */}
+                        </li>
+                        <li>
+                            <Link to='/crear' className='nav-link'>Crear Producto</Link> {/* */}
                         </li>
                     </ul>
                 </div>

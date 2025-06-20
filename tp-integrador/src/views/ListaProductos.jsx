@@ -42,7 +42,7 @@ function ListaProductos() {
                             <div className="card-body text-center">
                                 {/* card-title: Título de la tarjeta. */}
                                 <h5 className="card-title">{producto.title}</h5>
-                                <p className="card-text text-muted">Precio: ${producto.price.toFixed(2)}</p>
+                                <p className="card-text text-muted">Precio: ${producto.price}</p>
                                 <p className="card-text text-muted">Categoría: {producto.category}</p>
                                 {/* d-grid gap-2: Botones apilados con espaciado, d-md-block para que se apilen en md. */}
                                 {/* mt-auto: Empuja el contenido hacia la parte inferior de la tarjeta. */}
