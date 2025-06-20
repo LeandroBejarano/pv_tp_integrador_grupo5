@@ -4,6 +4,8 @@ import { agregarProducto, fetchProducts } from '../services/ProductsSlice';
 import { useState, useEffect } from 'react';
 import highestId from '../components/highestId';
 import { useNavigate } from 'react-router-dom';
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function CrearProducto() {
     const dispatch = useDispatch();
@@ -35,6 +37,10 @@ function CrearProducto() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!nuevoProducto.image) {
+            toast.error("Seleccione una imagen y vuelva a intentarlo")
+            return;
+        }
         const id = highestId(productos);
         const productoFinal = {
             ...nuevoProducto,
@@ -54,8 +60,10 @@ function CrearProducto() {
             rating: 0,
             image: '',
         });
-
-        navigate('/lista');
+        toast.success("Producto creado exitosamente")
+        setTimeout(()=>{
+            navigate('/lista');
+        },5000);
     };
 
     return (
@@ -185,6 +193,7 @@ function CrearProducto() {
                 {/* Botón de envío con estilo de éxito y ancho completo */}
                 <button type="submit" className="btn btn-success w-100">Agregar Producto</button>
             </form>
+            <ToastContainer/>
         </div>
     );
 }
