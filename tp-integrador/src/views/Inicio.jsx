@@ -1,4 +1,4 @@
-function Inicio () {
+function Inicio() {
     return (
         // card: Un componente de Bootstrap para agrupar contenido.
         // p-4: Padding de 4 unidades.

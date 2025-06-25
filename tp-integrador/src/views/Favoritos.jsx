@@ -1,6 +1,6 @@
-import {useDispatch, useSelector} from "react-redux"; //
-import {toggleFavorito} from "../services/ProductsSlice"; //
-import {Link} from "react-router-dom"; // Necesario para el enlace a detalles.
+import { useDispatch, useSelector } from "react-redux"; //
+import { toggleFavorito } from "../services/ProductsSlice"; //
+import { Link } from "react-router-dom"; // Necesario para el enlace a detalles.
 
 function Favoritos() {
     const dispatch = useDispatch(); //
@@ -24,7 +24,7 @@ function Favoritos() {
                                     src={producto.image}
                                     alt={producto.title}
                                     className="card-img-top img-fluid p-3"
-                                    style={{height: '200px', objectFit: 'contain'}}
+                                    style={{ height: '200px', objectFit: 'contain' }}
                                 />
                                 <div className="card-body text-center">
                                     <h5 className="card-title">{producto.title}</h5>
@@ -34,16 +34,16 @@ function Favoritos() {
                                         <Link to={`/lista/${producto.id}`} className="btn btn-info btn-sm">Ver
                                             Detalles</Link> {/* */}
                                         <div
-                                        className={`position-absolute top-0 end-0 m-2`}
-                                        style={{ zIndex: 1 }}
-                                    >
-                                        <i
-                                            className={`bi ${favoritos.includes(producto.id) ? 'bi-star-fill text-warning' : 'bi-star'} fs-4`}
-                                            style={{ cursor: 'pointer' }}
-                                            title={favoritos.includes(producto.id) ? 'Quitar de favoritos' : 'Añadir a favoritos'}
-                                            onClick={() => dispatch(toggleFavorito(producto.id))}
-                                        ></i>
-                                    </div>
+                                            className={`position-absolute top-0 end-0 m-2`}
+                                            style={{ zIndex: 1 }}
+                                        >
+                                            <i
+                                                className={`bi ${favoritos.includes(producto.id) ? 'bi-star-fill text-warning' : 'bi-star'} fs-4`}
+                                                style={{ cursor: 'pointer' }}
+                                                title={favoritos.includes(producto.id) ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+                                                onClick={() => dispatch(toggleFavorito(producto.id))}
+                                            ></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
