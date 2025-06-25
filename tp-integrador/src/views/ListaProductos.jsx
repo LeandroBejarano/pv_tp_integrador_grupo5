@@ -22,6 +22,12 @@ function ListaProductos() {
         if (location.state?.eliminado) {
             toast.success("Producto eliminado exitosamente");
         }
+        if (location.state?.editado) {
+            toast.success("Cambios guardados exitosamente");
+        }
+        if (location.state?.creado) {
+            toast.success("Producto creado exitosamente");
+        }
     }, [location.state]);
 
     const handleEliminar = (id) => {
@@ -65,7 +71,8 @@ function ListaProductos() {
                                     {/* btn btn-primary: Botón primario de Bootstrap. */}
                                     <div className="mt-auto d-flex justify-content-center gap-2">
                                         <Link to={`/lista/${producto.id}`} className="btn btn-primary">Ver Detalles</Link> {/* */}
-                                        <button className="btn btn-danger" onClick={() => setModal(producto.id)} >Eliminar producto</button>
+                                        <button className="btn btn-danger" onClick={() => setModal(producto.id)} >Eliminar</button>
+                                        <Link to={`/lista/${producto.id}/editar`} className='btn btn-danger'>Editar</Link>
                                     </div>
                                     <div
                                         className={`position-absolute top-0 end-0 m-2`}
