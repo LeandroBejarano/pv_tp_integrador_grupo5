@@ -1,14 +1,20 @@
-import { useParams, Link } from "react-router-dom" // Se agrega Link para el botón de volver.
+import { useParams, Link, useNavigate } from "react-router-dom" // Se agrega Link para el botón de volver.
 import { useSelector, useDispatch } from "react-redux" //
-import { toggleFavorito } from "../services/ProductsSlice" //
+import { toggleFavorito, eliminarProducto } from "../services/ProductsSlice" //
+import { useState } from "react";
 
 function Detalles() {
     const { id } = useParams(); //
     const dispatch = useDispatch(); //
-
+    const [modal, setModal] = useState(false);
     const producto = useSelector(state => state.products.lista.find(p => p.id === parseInt(id))); //
     const favoritos = useSelector(state => state.products.favoritos); //
-    const esFavorito = favoritos.includes(parseInt(id)); //
+    const navigate = useNavigate();
+
+    const handleEliminar = () => {
+        dispatch(eliminarProducto(producto.id));
+        navigate("/lista", { state: { eliminado: true } });
+    };
 
     if (!producto) return <p className="text-center my-5">Cargando detalles del producto...</p> //
 
@@ -51,9 +57,36 @@ function Detalles() {
                     <div className="d-flex gap-2">
                         {/* btn btn-secondary: Botón secundario para volver. */}
                         <Link to='/lista' className="btn btn-secondary">Volver a la lista</Link>
+                        <button className="btn btn-danger" onClick={() => setModal(true)}>
+                            Eliminar
+                        </button>
                     </div>
                 </div>
             </div>
+
+            {modal && (
+                <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Confirmar eliminación</h5>
+                                <button type="button" className="btn-close" onClick={() => setModal(false)} />
+                            </div>
+                            <div className="modal-body">
+                                <p>¿Estás seguro de que querés eliminar este producto?</p>
+                            </div>
+                            <div className="modal-footer">
+                                <button className="btn btn-secondary" onClick={() => setModal(false)}>
+                                    Cancelar
+                                </button>
+                                <button className="btn btn-danger" onClick={handleEliminar}>
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
