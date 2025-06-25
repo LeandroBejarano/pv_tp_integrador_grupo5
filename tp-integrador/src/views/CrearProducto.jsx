@@ -4,6 +4,7 @@ import { agregarProducto, fetchProducts } from '../services/ProductsSlice';
 import { useState, useEffect } from 'react';
 import highestId from '../components/highestId';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 function CrearProducto() {
     const dispatch = useDispatch();
@@ -188,6 +189,7 @@ function CrearProducto() {
                 {/* Botón de envío con estilo de éxito y ancho completo */}
                 <button type="submit" className="btn btn-success w-100">Agregar Producto</button>
             </form>
+            <ToastContainer/>
         </div>
     );
 }
