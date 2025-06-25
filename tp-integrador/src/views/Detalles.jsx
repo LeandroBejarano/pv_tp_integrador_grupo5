@@ -60,6 +60,7 @@ function Detalles() {
                         <button className="btn btn-danger" onClick={() => setModal(true)}>
                             Eliminar
                         </button>
+                        <Link to={`/lista/${producto.id}/editar`} className="btn btn-danger">Editar</Link>
                     </div>
                 </div>
             </div>
