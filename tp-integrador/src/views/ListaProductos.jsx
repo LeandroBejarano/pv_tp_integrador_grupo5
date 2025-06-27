@@ -1,19 +1,40 @@
-import { useEffect } from "react"; //
+import { useEffect, useState } from "react"; //
 import { useDispatch, useSelector } from "react-redux"; //
-import { fetchProducts, toggleFavorito } from "../services/ProductsSlice"; //
-import { Link } from "react-router-dom"; //
+import { fetchProducts, toggleFavorito, eliminarProducto } from "../services/ProductsSlice"; //
+import { Link, useLocation } from "react-router-dom"; //
+import { toast, ToastContainer } from "react-toastify"
 
 function ListaProductos() {
     const dispatch = useDispatch(); //
+    const location = useLocation();
     const productos = useSelector(state => state.products.lista); //
     const favoritos = useSelector(state => state.products.favoritos); //
     const status = useSelector(state => state.products.status); //
+    const [modal, setModal] = useState(null);
 
     useEffect(() => { //
         if (status === 'idle') {
             dispatch(fetchProducts());
         }
     }, [status, dispatch])
+
+    useEffect(() => {
+        if (location.state?.eliminado) {
+            toast.success("Producto eliminado exitosamente");
+        }
+        if (location.state?.editado) {
+            toast.success("Cambios guardados exitosamente");
+        }
+        if (location.state?.creado) {
+            toast.success("Producto creado exitosamente");
+        }
+    }, [location.state]);
+
+    const handleEliminar = (id) => {
+        dispatch(eliminarProducto(id));
+        toast.success("Producto eliminado exitosamente");
+        setModalAbiertoPara(null);
+    };
 
     if (status === 'loading') return <p className="text-center my-5">Cargando lista...</p>; //
 
@@ -48,9 +69,11 @@ function ListaProductos() {
                                 {/* mt-auto: Empuja el contenido hacia la parte inferior de la tarjeta. */}
                                 <div className="mt-auto d-grid gap-2">
                                     {/* btn btn-primary: Botón primario de Bootstrap. */}
-                                    <Link to={`/lista/${producto.id}`} className="btn btn-primary">Ver Detalles</Link> {/* */}
-                                    {/* form-check form-switch: Estilo de interruptor para el checkbox. */}
-                                    {/* mt-2: Margen superior. */}
+                                    <div className="mt-auto d-flex justify-content-center gap-2">
+                                        <Link to={`/lista/${producto.id}`} className="btn btn-primary">Ver Detalles</Link> {/* */}
+                                        <button className="btn btn-danger" onClick={() => setModal(producto.id)} >Eliminar</button>
+                                        <Link to={`/lista/${producto.id}/editar`} className='btn btn-danger'>Editar</Link>
+                                    </div>
                                     <div
                                         className={`position-absolute top-0 end-0 m-2`}
                                         style={{ zIndex: 1 }}
@@ -65,9 +88,35 @@ function ListaProductos() {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Modal para eliminar */}
+                        {modal === producto.id && (
+                            <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+                                <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title">Confirmar eliminación</h5>
+                                            <button type="button" className="btn-close" onClick={() => setModal(null)} />
+                                        </div>
+                                        <div className="modal-body">
+                                            <p>¿Estás seguro de que deseas eliminar este producto?</p>
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button className="btn btn-secondary" onClick={() => setModal(null)}>
+                                                Cancelar
+                                            </button>
+                                            <button className="btn btn-danger" onClick={() => handleEliminar(producto.id)}>
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
+            <ToastContainer />
         </div>
     );
 }

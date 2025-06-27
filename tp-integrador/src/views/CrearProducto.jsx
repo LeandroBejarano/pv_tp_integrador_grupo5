@@ -4,8 +4,7 @@ import { agregarProducto, fetchProducts } from '../services/ProductsSlice';
 import { useState, useEffect } from 'react';
 import highestId from '../components/highestId';
 import { useNavigate } from 'react-router-dom';
-import {ToastContainer, toast} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
 
 function CrearProducto() {
     const dispatch = useDispatch();
@@ -60,10 +59,7 @@ function CrearProducto() {
             rating: 0,
             image: '',
         });
-        toast.success("Producto creado exitosamente")
-        setTimeout(()=>{
-            navigate('/lista');
-        },5000);
+        navigate("/lista", { state: { creado: true } });
     };
 
     return (

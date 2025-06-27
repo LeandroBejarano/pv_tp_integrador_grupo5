@@ -6,6 +6,7 @@ import Favoritos from './views/Favoritos'; //
 import Detalles from './views/Detalles'; //
 import Footer from './components/Footer';
 import CrearProducto from './views/CrearProducto';
+import Editar from './views/Editar';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path='/inicio' element={<Inicio />} /> {/* */}
             <Route path='/lista' element={<ListaProductos />} /> {/* */}
             <Route path='/lista/:id' element={<Detalles />} /> {/* */}
+            <Route path='/lista/:id/editar' element={<Editar/>} /> {/* */}
             <Route path='/favoritos' element={<Favoritos />} /> {/* */}
             <Route path='/crear' element={<CrearProducto/>} /> {/**/}
           </Routes>

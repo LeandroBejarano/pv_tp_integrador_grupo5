@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'; // para enlaces de navegación.
+import { Link } from 'react-router-dom'; // para enlaces de navegación.
 
 function NavBar() {
     return (
