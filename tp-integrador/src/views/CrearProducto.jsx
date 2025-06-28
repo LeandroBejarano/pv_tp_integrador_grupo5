@@ -1,4 +1,3 @@
-import ImagesDefault from '../services/ImagesDefault';
 import { useDispatch, useSelector } from 'react-redux';
 import { agregarProducto, fetchProducts } from '../services/ProductsSlice';
 import { useState, useEffect } from 'react';
@@ -10,7 +9,7 @@ function CrearProducto() {
     const dispatch = useDispatch();
     const productos = useSelector(state => state.products.lista);
     const navigate = useNavigate();
-
+    const [visibleImage, setVisibleImage] = useState(false);
     const [nuevoProducto, setNuevoProducto] = useState({
         id: '',
         title: '',
@@ -27,8 +26,6 @@ function CrearProducto() {
         }
     }, [productos, dispatch]);
 
-    const images = ImagesDefault();
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setNuevoProducto(prev => ({ ...prev, [name]: value }));
@@ -36,8 +33,9 @@ function CrearProducto() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!nuevoProducto.image) {
-            toast.error("Seleccione una imagen y vuelva a intentarlo")
+        {/*De no set visible la imagen, se envia un aviso al usuario*/}
+        if (!visibleImage) {
+            toast.error("Ingrese una URL de imagen valida y vuelva a intentarlo")
             return;
         }
         const id = highestId(productos);
@@ -47,9 +45,7 @@ function CrearProducto() {
             price: parseFloat(nuevoProducto.price),
             rating: { rate: parseFloat(nuevoProducto.rating), count: 100 }
         };
-
         dispatch(agregarProducto(productoFinal));
-
         setNuevoProducto({
             id: '',
             title: '',
@@ -59,6 +55,7 @@ function CrearProducto() {
             rating: 0,
             image: '',
         });
+        setVisibleImage(false);
         navigate("/lista", { state: { creado: true } });
     };
 
@@ -151,45 +148,36 @@ function CrearProducto() {
                 </div>
 
                 <div className="mb-3">
-                    <label className="form-label">Seleccionar imagen:</label>
+                    <label className="form-label">Ingrese la URL de una imagen:</label>
                     {/* Flexbox para mostrar miniaturas en fila con separación (Bootstrap: d-flex, flex-wrap, gap-2) */}
-                    <div className="d-flex flex-wrap gap-2 mb-3">
-                        {images.map((img, index) => (
-                            <img
-                                key={index}
-                                src={img}
-                                alt={`img_${index}`}
-                                // img-thumbnail: bordes redondeados y padding, border-primary y border-3 si está seleccionada
-                                className={`img-thumbnail ${nuevoProducto.image === img ? 'border border-primary border-3' : ''}`}
-                                style={{
-                                    width: '50px',
-                                    height: '50px',
-                                    objectFit: 'cover',
-                                    cursor: 'pointer'
-                                }}
-                                onClick={() => setNuevoProducto(prev => ({ ...prev, image: img }))}
-                            />
-                        ))}
-                    </div>
-
-                    {/* Imagen seleccionada con previsualización centrada y estilo responsive */}
-                    {nuevoProducto.image && (
-                        <div className="text-center">
-                            <p className="mb-2">Previsualización de la imagen:</p>
-                            <img
-                                src={nuevoProducto.image}
-                                alt="Previsualización"
-                                className="img-fluid rounded shadow-sm"
-                                style={{ maxWidth: '150px' }}
-                            />
-                        </div>
-                    )}
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="image"
+                        name="image"
+                        value={nuevoProducto.image}
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
+                {nuevoProducto.image && (
+                    <div className="d-flex flex-wrap gap-2 mb-3">
+                        <p className="mb-2">Previsualización de la imagen:</p>
+                        <img
+                            src={nuevoProducto.image}
+                            alt={`Previsualización`}
+                            className='img-fluid border rounded shadow-sm'
+                            style={{width: '200px',height: '200px'}}
+                            onLoad={()=> setVisibleImage(true)}
+                            onError={()=> setVisibleImage(false)} 
+                        />
+                    </div>
+                )}
 
                 {/* Botón de envío con estilo de éxito y ancho completo */}
                 <button type="submit" className="btn btn-success w-100">Agregar Producto</button>
             </form>
-            <ToastContainer/>
+            <ToastContainer />
         </div>
     );
 }
