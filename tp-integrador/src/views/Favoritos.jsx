@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"; //
 import { toggleFavorito } from "../services/ProductsSlice"; //
 import { Link } from "react-router-dom"; // Necesario para el enlace a detalles.
+import TextoGris from "../components/TextoGris";
 
 function Favoritos() {
     const dispatch = useDispatch(); //
@@ -28,8 +29,8 @@ function Favoritos() {
                                 />
                                 <div className="card-body text-center">
                                     <h5 className="card-title">{producto.title}</h5>
-                                    <p className="card-text text-muted">Precio: ${producto.price.toFixed(2)}</p>
-                                    <p className="card-text text-muted">Categoría: {producto.category}</p>
+                                    <TextoGris>Precio: ${producto.price.toFixed(2)}</TextoGris>
+                                    <TextoGris>Categoría: {producto.category}</TextoGris>
                                     <div className="mt-auto d-grid gap-2">
                                         <Link to={`/lista/${producto.id}`} className="btn btn-info btn-sm">Ver
                                             Detalles</Link> {/* */}

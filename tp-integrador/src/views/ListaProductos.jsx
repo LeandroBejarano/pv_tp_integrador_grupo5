@@ -4,6 +4,7 @@ import { fetchProducts, toggleFavorito, eliminarProducto } from "../services/Pro
 import { Link, useLocation } from "react-router-dom"; //
 import { toast, ToastContainer } from "react-toastify"
 import Carga from "../components/Carga";
+import TextoGris from "../components/TextoGris";
 
 function ListaProductos() {
     const dispatch = useDispatch(); //
@@ -64,8 +65,8 @@ function ListaProductos() {
                             <div className="card-body text-center">
                                 {/* card-title: Título de la tarjeta. */}
                                 <h5 className="card-title">{producto.title}</h5>
-                                <p className="card-text text-muted">Precio: ${producto.price}</p>
-                                <p className="card-text text-muted">Categoría: {producto.category}</p>
+                                <TextoGris>Precio: ${producto.price}</TextoGris>
+                                <TextoGris>Categoría: {producto.category}</TextoGris>
                                 {/* d-grid gap-2: Botones apilados con espaciado, d-md-block para que se apilen en md. */}
                                 {/* mt-auto: Empuja el contenido hacia la parte inferior de la tarjeta. */}
                                 <div className="mt-auto d-grid gap-2">
