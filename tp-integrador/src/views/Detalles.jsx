@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom" // Se agrega Lin
 import { useSelector, useDispatch } from "react-redux" //
 import { toggleFavorito, eliminarProducto } from "../services/ProductsSlice" //
 import { useState } from "react";
+import Carga from "../components/Carga";
 
 function Detalles() {
     const { id } = useParams(); //
@@ -16,7 +17,7 @@ function Detalles() {
         navigate("/lista", { state: { eliminado: true } });
     };
 
-    if (!producto) return <p className="text-center my-5">Cargando detalles del producto...</p> //
+    if (!producto) return <Carga/> //
 
     return (
         // card p-4 shadow-sm: Tarjeta con padding y sombra.

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { editarProducto } from "../services/ProductsSlice";
 import ImagesDefault from '../services/ImagesDefault';
+import Carga from "../components/Carga";
 
 function Editar() {
     const { id } = useParams();
@@ -52,7 +53,7 @@ function Editar() {
     }
 
     // Mensaje de carga o si el producto no se encuentra.
-    if (!producto) return <p className="text-center my-5">Producto no encontrado o cargando...</p>;
+    if (!producto) return <Carga/>
 
     return (
         // card: Contenedor principal con estilo de tarjeta de Bootstrap.

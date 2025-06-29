@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"; //
 import { fetchProducts, toggleFavorito, eliminarProducto } from "../services/ProductsSlice"; //
 import { Link, useLocation } from "react-router-dom"; //
 import { toast, ToastContainer } from "react-toastify"
+import Carga from "../components/Carga";
 
 function ListaProductos() {
     const dispatch = useDispatch(); //
@@ -36,7 +37,7 @@ function ListaProductos() {
         setModalAbiertoPara(null);
     };
 
-    if (status === 'loading') return <p className="text-center my-5">Cargando lista...</p>; //
+    if (status === 'loading') return <Carga/>
 
     return (
         <div>
