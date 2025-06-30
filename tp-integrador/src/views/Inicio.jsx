@@ -41,6 +41,7 @@ function Inicio() {
                                 src={image}
                                 className="d-block w-100 img-carousel"
                                 alt={`Tienda de Todo - Slide ${index + 1}`}
+                                style={{ height: "300px", objectFit: "contain" }}
                             />
                         </div>
                     ))}
@@ -51,7 +52,7 @@ function Inicio() {
                     data-bs-target="#carouselExampleIndicators"
                     data-bs-slide="prev"
                 >
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="carousel-control-prev-icon" aria-hidden="true" style={{ filter: "invert(1)" }}></span>
                     <span className="visually-hidden">Anterior</span>
                 </button>
                 <button
@@ -60,7 +61,7 @@ function Inicio() {
                     data-bs-target="#carouselExampleIndicators"
                     data-bs-slide="next"
                 >
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="carousel-control-next-icon" aria-hidden="true" style={{ filter: "invert(1)" }}></span>
                     <span className="visually-hidden">Siguiente</span>
                 </button>
             </div>
