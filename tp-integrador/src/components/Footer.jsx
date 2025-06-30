@@ -13,7 +13,7 @@ function Footer() {
         <footer className="bg-dark text-white py-3 text-center mt-auto">
             <div className="container"> {/* Usa el contenedor de Bootstrap para alinear el contenido */}
                 <p className="mb-1"> {/* mb-1: Margen inferior pequeño */}
-                    &copy; {currentYear} Tienda Online. Todos los derechos reservados.
+                    &copy; {currentYear} "De Todo" Tienda Online. Todos los derechos reservados.
                 </p>
                 <p className="mb-0"> {/* mb-0: Sin margen inferior */}
                     {/* Link: Para navegación interna con React Router */}
