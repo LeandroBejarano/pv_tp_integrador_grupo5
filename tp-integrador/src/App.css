@@ -40,3 +40,45 @@
 .read-the-docs {
   color: #888;
 }
+/* Estilo para el título "De Todo" */
+.tienda-de-todo-title {
+  color: #007bff; /* Azul primario de Bootstrap */
+  font-family: 'Arial Black', sans-serif; /* Una fuente negrita e impactante */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  letter-spacing: 2px; /* Un poco de espaciado entre letras */
+  animation: fadeInDown 1s ease-out; /* Animación simple para la aparición */
+}
+
+/* Animación de keyframe para el título */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Estilo para las imágenes del carrusel para asegurar altura consistente y object-fit */
+.img-carousel {
+  height: 400px; /* Ajusta según sea necesario */
+  object-fit: contain; /* Asegura que la imagen completa sea visible dentro del contenedor */
+  background-color: #fff; /* Fondo blanco para las imágenes, especialmente si tienen partes transparentes */
+  border-radius: 8px; /* Esquinas ligeramente redondeadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Opcional: Ajusta los controles del carrusel si se mezclan demasiado */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo más oscuro para visibilidad */
+  border-radius: 50%; /* Hacerlos redondos */
+  padding: 15px; /* Aumentar el tamaño */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%; /* Hacer el área clicable más pequeña */
+}
