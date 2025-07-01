@@ -2,15 +2,15 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { editarProducto } from "../services/ProductsSlice";
-import ImagesDefault from '../services/ImagesDefault';
 import Carga from "../components/Carga";
+import { toast, ToastContainer } from 'react-toastify';
 
 function Editar() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const producto = useSelector(state => state.products.lista.find(p => p.id === parseInt(id)));
-    const images = ImagesDefault();
+    const [visibleImage, setVisibleImage] = useState(false);
 
     // Estado local para manejar los datos del formulario de edición.
     const [editarProd, setEditarProd] = useState({
@@ -43,17 +43,22 @@ function Editar() {
     const handleEdit = (e) => {
         e.preventDefault();
         // Re-estructura el objeto rating para que coincida con el formato original antes de enviarlo.
+        if (!visibleImage) {
+            toast.error("Ingrese una URL de imagen valida y vuelva a intentarlo")
+            return;
+        }
         const productoFinal = {
             ...editarProd,
             price: parseFloat(editarProd.price),
             rating: { rate: parseFloat(editarProd.rating), count: producto.rating.count || 100 } // Mantiene el count original.
         };
         dispatch(editarProducto(productoFinal));
+        setVisibleImage(false);
         navigate("/lista", { state: { editado: true } });
     }
 
     // Mensaje de carga o si el producto no se encuentra.
-    if (!producto) return <Carga/>
+    if (!producto) return <Carga />
 
     return (
         // card: Contenedor principal con estilo de tarjeta de Bootstrap.
@@ -102,27 +107,31 @@ function Editar() {
                 </div>
 
                 <div className="mb-3">
-                    <label className="form-label">Seleccionar imagen:</label>
-                    {/* d-flex, flex-wrap, gap-2: Clases de Flexbox para alinear las imágenes en una fila con espaciado. */}
-                    <div className="d-flex flex-wrap gap-2 mb-3">
-                        {images.map((img, index) => (
-                            <img key={index} src={img} alt={`img_${index}`}
-                                // img-thumbnail: Añade un borde redondeado y padding.
-                                // Se aplica un borde azul y más grueso si la imagen está seleccionada.
-                                className={`img-thumbnail ${editarProd.image === img ? 'border border-primary border-3' : ''}`}
-                                style={{ width: '50px', height: '50px', objectFit: 'cover', cursor: 'pointer' }}
-                                onClick={() => setEditarProd(prev => ({ ...prev, image: img }))}
-                            />
-                        ))}
-                    </div>
-                    {/* Previsualización de la imagen seleccionada. */}
-                    {editarProd.image && (
-                        <div className="text-center">
-                            <p className="mb-2">Previsualización:</p>
-                            <img src={editarProd.image} alt="Previsualización" className="img-fluid rounded shadow-sm" style={{ maxWidth: '150px' }} />
-                        </div>
-                    )}
+                    <label className="form-label">Ingrese la URL de una imagen:</label>
+                    {/* Flexbox para mostrar miniaturas en fila con separación (Bootstrap: d-flex, flex-wrap, gap-2) */}
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="image"
+                        name="image"
+                        value={editarProd.image}
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
+                {editarProd.image && (
+                    <div className="d-flex flex-wrap gap-2 mb-3">
+                        <p className="mb-2">Previsualización de la imagen:</p>
+                        <img
+                            src={editarProd.image}
+                            alt={`Previsualización`}
+                            className='img-fluid border rounded shadow-sm'
+                            style={{ width: '200px', height: '200px' }}
+                            onLoad={() => setVisibleImage(true)}
+                            onError={() => setVisibleImage(false)}
+                        />
+                    </div>
+                )}
 
                 {/* d-flex gap-2: Contenedor Flexbox para alinear los botones con un espacio entre ellos. */}
                 <div className="d-flex gap-2 mt-4">
@@ -132,6 +141,7 @@ function Editar() {
                     <button type="submit" className="btn btn-primary w-100">Guardar Cambios</button>
                 </div>
             </form>
+            <ToastContainer />
         </div>
     )
 }
