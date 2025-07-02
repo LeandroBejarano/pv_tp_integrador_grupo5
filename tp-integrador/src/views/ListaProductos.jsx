@@ -30,6 +30,9 @@ function ListaProductos() {
         if (location.state?.creado) {
             toast.success("Producto creado exitosamente");
         }
+        if (location.state?.logeado){
+            toast.success("Sesión iniciada con éxito")
+        }
     }, [location.state]);
 
     const handleEliminar = (id) => {
