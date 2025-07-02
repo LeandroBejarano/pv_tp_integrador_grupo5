@@ -1,7 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo00.png';
+import { useSelector, useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { logoutUser } from '../services/UsersSlice';
 
 function NavBar() {
+
+  const user = useSelector(state => state.users.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/login");
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-2">
       <div className="container-fluid">
@@ -14,7 +27,7 @@ function NavBar() {
             height="40"
             className="d-inline-block align-top me-2"
           />
-        
+
         </Link>
 
         {/* Botón toggler para móviles */}
@@ -43,6 +56,12 @@ function NavBar() {
               <Link to="/crear" className="nav-link">Crear Producto</Link>
             </li>
           </ul>
+
+          {/* Cierre de sesión para usuario activo */}
+          {user && (
+            <button onClick={handleLogout}>Cerrar sesión</button>
+          )}
+
         </div>
       </div>
     </nav>
