@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUsers, saveUsers } from "../session/sessionStorage";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -45,6 +45,7 @@ function RegistrarUsuario() {
 
                 <button type="submit" >Registrarme</button>
             </form>
+            <Link className="btn btn-primary" to="/login">Volver</Link>
             <ToastContainer />
         </div>
     )
