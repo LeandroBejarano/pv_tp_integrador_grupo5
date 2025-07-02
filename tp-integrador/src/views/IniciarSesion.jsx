@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { loginUser } from "../services/UsersSlice";
 import { toast, ToastContainer } from "react-toastify";
@@ -39,6 +39,7 @@ function IniciarSesion() {
 
                 <button type="submit">Iniciar Sesion</button>
             </form>
+            <p>¿No tienes una cuenta registrada?<Link to="/registro">¡Registrate ahora!</Link>  </p>
             <ToastContainer />
         </div>
     )
