@@ -7,6 +7,8 @@ import Detalles from './views/Detalles'; //
 import Footer from './components/Footer';
 import CrearProducto from './views/CrearProducto';
 import Editar from './views/Editar';
+import RegistrarUsuario from './views/RegistrarUsuario';
+import IniciarSesion from './views/IniciarSesion';
 
 function App() {
   return (
@@ -28,7 +30,9 @@ function App() {
             <Route path='/lista/:id' element={<Detalles />} /> {/* */}
             <Route path='/lista/:id/editar' element={<Editar/>} /> {/* */}
             <Route path='/favoritos' element={<Favoritos />} /> {/* */}
-            <Route path='/crear' element={<CrearProducto/>} /> {/**/}
+            <Route path='/crear' element={<CrearProducto/>} /> {/* */}
+            <Route path='/login' element={<IniciarSesion/>} /> {/* */}
+            <Route path="/registro" element={<RegistrarUsuario/>} /> {/* */}
           </Routes>
         </main>
         </div>
