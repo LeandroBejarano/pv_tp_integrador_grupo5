@@ -10,6 +10,7 @@ import Editar from './views/Editar';
 import RegistrarUsuario from './views/RegistrarUsuario';
 import IniciarSesion from './views/IniciarSesion';
 import PrivateRoute from './hook/PrivateRoute';
+import PublicRoute from './hook/PublicRoute';
 
 function App() {
   return (
@@ -26,14 +27,19 @@ function App() {
           <main className="flex-fill container mt-4">
             <Routes>
               <Route path='/' element={<Navigate to='/inicio' />} /> {/* */}
-              <Route path='/inicio' element={<Inicio />} /> {/* */}
+
+              {/* Rutas protegidas */}
+              <Route path='/inicio' element={<PrivateRoute> <Inicio /> </PrivateRoute>} /> {/* */}
               <Route path='/lista' element={<PrivateRoute> <ListaProductos /> </PrivateRoute>} /> {/* */}
               <Route path='/lista/:id' element={<PrivateRoute> <Detalles /> </PrivateRoute>} /> {/* */}
               <Route path='/lista/:id/editar' element={<PrivateRoute> <Editar /> </PrivateRoute>} /> {/* */}
               <Route path='/favoritos' element={<PrivateRoute> <Favoritos /> </PrivateRoute>} /> {/* */}
               <Route path='/crear' element={<PrivateRoute> <CrearProducto /> </PrivateRoute>} /> {/* */}
-              <Route path='/login' element={<IniciarSesion />} /> {/* */}
-              <Route path="/registro" element={<RegistrarUsuario />} /> {/* */}
+
+              {/* Rutas publicas de sesión */}
+              <Route path='/login' element={<PublicRoute> <IniciarSesion /> </PublicRoute>} /> {/* */}
+              <Route path="/registro" element={<PublicRoute> <RegistrarUsuario /> </PublicRoute>} /> {/* */}
+
             </Routes>
           </main>
         </div>
