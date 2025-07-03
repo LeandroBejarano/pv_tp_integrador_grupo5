@@ -16,8 +16,6 @@ cd tp-integrador
 
 npm install
 
-npm install bootstrap-icons
-
 npm run dev
 
 --------------------------------------------
@@ -26,4 +24,4 @@ npm run dev
 
 En este proyecto plasmamos todo lo aprendido durante la cursada de la materia Programación Visual, desarrollando una Single Page Application (SPA) con React y Vite. La aplicación consume datos desde una API externa para mostrar una lista de productos, sobre los cuales se implementaron funcionalidades como: visualización en detalle, marcado como favorito, creación, edición y eliminación.
 
-El manejo del estado global se realizó utilizando Redux Toolkit, permitiendo una gestión eficiente y centralizada del estado en toda la aplicación. Además, se utilizó React Router para la navegación entre vistas y Bootstrap como framework para el diseño visual.
+El manejo del estado global se realizó utilizando Redux Toolkit, permitiendo una gestión eficiente y centralizada del estado en toda la aplicación. Además, se utilizó React Router para la navegación entre vistas y Bootstrap como framework para el diseño visual. También implementamos una feature de inicio de sesión y registro de usuario junto a la protección de rutas que requieran una sesión activa para usarse

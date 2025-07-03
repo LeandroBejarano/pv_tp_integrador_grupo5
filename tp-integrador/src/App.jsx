@@ -7,6 +7,10 @@ import Detalles from './views/Detalles'; //
 import Footer from './components/Footer';
 import CrearProducto from './views/CrearProducto';
 import Editar from './views/Editar';
+import RegistrarUsuario from './views/RegistrarUsuario';
+import IniciarSesion from './views/IniciarSesion';
+import PrivateRoute from './hook/PrivateRoute';
+import PublicRoute from './hook/PublicRoute';
 
 function App() {
   return (
@@ -14,26 +18,33 @@ function App() {
       <BrowserRouter>
         {/* NavBar ahora se encarga de sus propios enlaces internos. */}
         <div className="d-flex flex-column min-vh-100">
-        <NavBar />
-        {/*
+          <NavBar />
+          {/*
           container mt-4: Una clase de Bootstrap que proporciona un ancho fijo
           (responsivo) y centra el contenido, con un margen superior de 4 unidades.
           Esto envuelve las rutas para una mejor presentación visual.
         */}
-        <main className="flex-fill container mt-4">
-          <Routes>
-            <Route path='/' element={<Navigate to='/inicio' />} /> {/* */}
-            <Route path='/inicio' element={<Inicio />} /> {/* */}
-            <Route path='/lista' element={<ListaProductos />} /> {/* */}
-            <Route path='/lista/:id' element={<Detalles />} /> {/* */}
-            <Route path='/lista/:id/editar' element={<Editar/>} /> {/* */}
-            <Route path='/favoritos' element={<Favoritos />} /> {/* */}
-            <Route path='/crear' element={<CrearProducto/>} /> {/**/}
-          </Routes>
-        </main>
+          <main className="flex-fill container mt-4">
+            <Routes>
+              <Route path='/' element={<Navigate to='/inicio' />} /> {/* */}
+
+              {/* Rutas protegidas */}
+              <Route path='/inicio' element={<PrivateRoute> <Inicio /> </PrivateRoute>} /> {/* */}
+              <Route path='/lista' element={<PrivateRoute> <ListaProductos /> </PrivateRoute>} /> {/* */}
+              <Route path='/lista/:id' element={<PrivateRoute> <Detalles /> </PrivateRoute>} /> {/* */}
+              <Route path='/lista/:id/editar' element={<PrivateRoute> <Editar /> </PrivateRoute>} /> {/* */}
+              <Route path='/favoritos' element={<PrivateRoute> <Favoritos /> </PrivateRoute>} /> {/* */}
+              <Route path='/crear' element={<PrivateRoute> <CrearProducto /> </PrivateRoute>} /> {/* */}
+
+              {/* Rutas publicas de sesión */}
+              <Route path='/login' element={<PublicRoute> <IniciarSesion /> </PublicRoute>} /> {/* */}
+              <Route path="/registro" element={<PublicRoute> <RegistrarUsuario /> </PublicRoute>} /> {/* */}
+
+            </Routes>
+          </main>
         </div>
       </BrowserRouter>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

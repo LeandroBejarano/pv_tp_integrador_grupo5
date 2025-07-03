@@ -126,7 +126,7 @@ function CrearProducto() {
                         <option value="men's clothing">Men's clothing</option>
                         <option value="women's clothing">Women's clothing</option>
                         <option value="electronics">Electronics</option>
-                        <option value="jewelry">Jewelry</option>
+                        <option value="jewelery">Jewelry</option>
                     </select>
                 </div>
 
