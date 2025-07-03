@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { loginUser } from "../services/UsersSlice";
 import { toast, ToastContainer } from "react-toastify";
@@ -17,6 +17,14 @@ function IniciarSesion() {
     e.preventDefault();
     dispatch(loginUser({ email, password }));
   };
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.ucreado){
+      toast.success("Usuario registrado")
+    }
+    }, [location.state])
 
   useEffect(() => {
     if (user) {

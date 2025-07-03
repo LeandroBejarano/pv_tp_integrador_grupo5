@@ -27,7 +27,7 @@ function RegistrarUsuario() {
     }
     const newUser = { email, password };
     saveUsers([...users, newUser]);
-    navigate("/");
+    navigate("/login", { state: { ucreado: true } });
   };
 
   return (
