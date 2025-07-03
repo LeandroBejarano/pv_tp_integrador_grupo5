@@ -57,9 +57,23 @@ function NavBar() {
             </li>
           </ul>
 
-          {/* Cierre de sesión para usuario activo */}
+          {/* Bienvenida+Cierre de sesión, para usuario activo */}
           {user && (
-            <button onClick={handleLogout}>Cerrar sesión</button>
+            <div className="d-flex align-items-center gap-3 text-white">
+              <span className="me-2">
+                Bienvenido, <strong>{user.email}</strong>
+              </span>
+              <button onClick={handleLogout} className="btn btn-outline-light">
+                Cerrar sesión
+              </button>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/12225/12225935.png"
+                alt="Logout Icon"
+                width="30"
+                height="30"
+                className="img-fluid"
+              />
+            </div>
           )}
 
         </div>
@@ -69,3 +83,4 @@ function NavBar() {
 }
 
 export default NavBar;
+
