@@ -21,16 +21,16 @@ function IniciarSesion() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.state?.ucreado){
+    if (location.state?.ucreado) {
       toast.success("Usuario registrado")
     }
-    }, [location.state])
+  }, [location.state])
 
   useEffect(() => {
     if (user) {
       setEmail("");
       setPassword("");
-      navigate("/lista", { state: { logeado: true } });
+      navigate("/inicio", { state: { logeado: true } });
     } else if (error) {
       toast.error("Credenciales inválidas");
     }

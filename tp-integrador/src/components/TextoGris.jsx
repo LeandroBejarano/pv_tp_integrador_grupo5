@@ -1,4 +1,4 @@
-function TextoGris ({children}) {
+function TextoGris({ children }) {
     return (
         <p className="card-text text-muted">{children}</p>
     )

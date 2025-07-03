@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo00.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navigate } from 'react-router-dom';
 import { logoutUser } from '../services/UsersSlice';
 
 function NavBar() {
