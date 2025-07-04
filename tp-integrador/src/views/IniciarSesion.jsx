@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { loginUser } from "../services/UsersSlice";
+import { loginUser, resetError } from "../services/UsersSlice";
 import { toast, ToastContainer } from "react-toastify";
 
 function IniciarSesion() {
@@ -33,6 +33,7 @@ function IniciarSesion() {
       navigate("/inicio", { state: { logeado: true } });
     } else if (error) {
       toast.error("Credenciales inválidas");
+      dispatch(resetError())
     }
   }, [user, error, navigate]);
 

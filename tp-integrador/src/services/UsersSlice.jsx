@@ -9,30 +9,33 @@ const initialState = {
 const usersSlice = createSlice({
     name: "users",
     initialState,
-    reducers:{
+    reducers: {
         loginUser: (state, action) => {
-            const {email, password} = action.payload;
+            const { email, password } = action.payload;
             const users = JSON.parse(localStorage.getItem("users")) || [];
 
-            const foundUser = users.find(u=>u.email === email && u.password===password);
-            if (foundUser){
-                state.user={email: foundUser.email};
-                state.error=null;
-                saveSession({email: foundUser.email});
+            const foundUser = users.find(u => u.email === email && u.password === password);
+            if (foundUser) {
+                state.user = { email: foundUser.email };
+                state.error = null;
+                saveSession({ email: foundUser.email });
             }
-            else{
-                state.user=null;
-                state.error="Credenciales invalidas";
+            else {
+                state.user = null;
+                state.error = "Credenciales invalidas";
             }
         },
-        logoutUser: (state) =>{
-            state.user=null;
-            state.error=null;
+        logoutUser: (state) => {
+            state.user = null;
+            state.error = null;
             clearSession();
+        },
+        resetError: (state) => {
+            state.error = null;
         }
     }
 });
 
 
-export const { loginUser, logoutUser } = usersSlice.actions;
+export const { loginUser, logoutUser, resetError } = usersSlice.actions;
 export default usersSlice.reducer;
